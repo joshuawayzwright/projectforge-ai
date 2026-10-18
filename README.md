@@ -1,0 +1,56 @@
+# ProjectForge AI
+
+An original **zero-API-cost**, mobile-first AI project discovery and planning app. It is inspired by **themes** from a publicly shared Pinterest board (not a reproduction of its Pins).
+
+## Features
+
+- Explore **30 original** project ideas across three skill levels; search and filter by category and difficulty.
+- Follow a roadmap through nine AI competencies.
+- Build checklists, maintain notes, save favourite ideas, and export a GitHub-ready `BUILD_BRIEF.md`.
+- Generate structured build/research/review prompts locally, without calling a paid AI service.
+- Save Pinterest or other inspiration links manually, with source URLs and notes.
+- Export a local JSON workspace backup.
+- Work offline after the first load thanks to a service worker.
+- Responsive layout optimised for Android and desktop.
+
+## Run locally
+
+No Node.js, build tools, environment variables or API keys required.
+
+```sh
+python3 -m http.server 8080
+```
+
+Open **http://localhost:8080/**. Opening `index.html` directly can render basic UI but service workers require an HTTP(S) origin.
+
+## Deploy
+
+### GitHub Pages
+1. Create a new repository, upload all files and folders at the repository root.
+2. In **Settings → Pages**, choose **Deploy from a branch**, `main`, `/(root)`.
+3. After Pages publishes, visit the URL reported by GitHub. The app uses relative paths and supports project Pages locations.
+
+### Vercel
+1. Import the GitHub repository into Vercel.
+2. Choose **Other** for the framework and leave the build command empty.
+3. Serve the root directory as the output directory.
+
+**Important:** Vercel's free Hobby plan is restricted to personal, non-commercial use. Check the current terms before using this as part of a paid product.
+
+## Data and privacy
+
+The app has no login, analytics, server API or external AI inference calls. Your saved projects, skill progress, inspiration links and notes stay in **your browser's localStorage**. The GitHub repository does not receive your notes and a new device will not automatically sync them. Use **Export workspace backup** before clearing browser data. Avoid storing sensitive personal information.
+
+External resource links open new tabs. The app does not scrape Pinterest or reproduce Pin images. No AI-generated claims of completed work, coding, or deployment are made.
+
+## Inspiration attribution
+
+The user's publicly shared [Artificial intelligence Pinterest board](https://au.pinterest.com/joshuawrightwayz2712/artificial-intelligence/) reportedly had 123 Pins when reviewed. Public page restrictions prevented inspecting the complete collection. Four visible thumbnail titles were identifiable: "9 AI Skills to Master in 2026", "60 Gen AI project ideas", "5 lessons from your brain (that could really help your computer)", and "15 Benefits of AI in Society". This prototype draws **general themes** from the first two; the project catalog and documentation are original and **should not be presented as the original contents of the Pins**.
+
+## Scope limitations
+
+This is a front-end MVP and requires no back-end service. It is **not** an LLM agent platform, a prompt execution engine, a Pinterest importer, a real workflow executor or a production subscription system. Structured prompts are generated with templates rather than an AI model. Timelines are estimates to help prioritise, not promises.
+
+## License
+
+MIT; see [LICENSE](LICENSE).
