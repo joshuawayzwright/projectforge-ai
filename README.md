@@ -9,7 +9,7 @@ An original **zero-API-cost**, mobile-first AI project discovery and planning ap
 - Build checklists, maintain notes, save favourite ideas, and export a GitHub-ready `BUILD_BRIEF.md`.
 - Generate structured build/research/review prompts locally, without calling a paid AI service.
 - Save Pinterest or other inspiration links manually, with source URLs and notes.
-- Export a local JSON workspace backup.
+- Export and restore a local JSON workspace backup (with validation and replacement confirmation).
 - Work offline after the first load thanks to a service worker.
 - Responsive layout optimised for Android and desktop.
 
@@ -39,7 +39,7 @@ Open **http://localhost:8080/**. Opening `index.html` directly can render basic 
 
 ## Data and privacy
 
-The app has no login, analytics, server API or external AI inference calls. Your saved projects, skill progress, inspiration links and notes stay in **your browser's localStorage**. The GitHub repository does not receive your notes and a new device will not automatically sync them. Use **Export workspace backup** before clearing browser data. Avoid storing sensitive personal information.
+The app has no login, analytics, server API or external AI inference calls. Your saved projects, skill progress, inspiration links and notes stay in **your browser's localStorage**. The GitHub repository does not receive your notes and a new device will not automatically sync them. Use **Export workspace backup** before clearing browser data; use **Restore workspace backup** to load the JSON backup on a new device. The restore action replaces the current local workspace after confirmation. Avoid storing sensitive personal information.
 
 External resource links open new tabs. The app does not scrape Pinterest or reproduce Pin images. No AI-generated claims of completed work, coding, or deployment are made.
 
@@ -54,3 +54,7 @@ This is a front-end MVP and requires no back-end service. It is **not** an LLM a
 ## License
 
 MIT; see [LICENSE](LICENSE).
+
+## Automated publishing
+
+The repository includes `.github/workflows/deploy-pages.yml` to publish the static site on every push to `main` and with manual workflow runs. **First enable GitHub Pages** in repository Settings → Pages, select **GitHub Actions** as the publishing source. The workflow cannot grant itself permission to activate Pages for a new repository; that initial administrator action is required. An active alternative is to import the same GitHub repository to a hosting provider with an available account.
