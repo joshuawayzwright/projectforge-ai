@@ -26,9 +26,9 @@ Open **http://localhost:8080/**. Opening `index.html` directly can render basic 
 ## Deploy
 
 ### GitHub Pages
-1. Create a new repository, upload all files and folders at the repository root.
-2. In **Settings → Pages**, choose **Deploy from a branch**, `main`, `/(root)`.
-3. After Pages publishes, visit the URL reported by GitHub. The app uses relative paths and supports project Pages locations.
+1. In **Settings → Pages**, change **Source** to **GitHub Actions**, then save. This one-time action requires a signed-in repository administrator.
+2. Run the included **Deploy ProjectForge AI to GitHub Pages** workflow from the Actions tab (or push a change to `main`).
+3. After a successful deployment, open the URL GitHub Pages reports. The app uses relative paths and supports project Pages locations.
 
 ### Vercel
 1. Import the GitHub repository into Vercel.
