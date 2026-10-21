@@ -76,6 +76,40 @@ document.addEventListener('input',e=>{if(e.target.id==='search'){const el=e.targ
 document.addEventListener('focusout',e=>{if(e.target.id==='notes'){state.notes[e.target.dataset.id]=e.target.value;persist()}});
 document.addEventListener('submit',e=>{if(e.target.id!=='pin-form')return;e.preventDefault();const title=$('#pin-title').value.trim(),url=safeUrl($('#pin-url').value.trim()),category=$('#pin-category').value,note=$('#pin-note').value.trim();if(!title||!url){toast('Enter a title and a valid http(s) URL');return}state.pins.unshift({id:Date.now()+'-'+Math.random().toString(36).slice(2),title,url,category,note,date:new Date().toISOString().slice(0,10)});persist();render();toast('Inspiration link saved')});
 $('#backup-btn').addEventListener('click',()=>{download('projectforge-workspace-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({version:1,exportedAt:new Date().toISOString(),data:state},null,2),'application/json');toast('Workspace backup downloaded')});
+// Validate imported workspace backups before restoring. This does not read data from the network.
+function validateBackup(parsed){
+  if(!parsed || typeof parsed!=='object' || parsed.version!==1 || !parsed.data || typeof parsed.data!=='object') throw new Error('Unsupported backup format');
+  const d=parsed.data;
+  if(!Array.isArray(d.saved)||!Array.isArray(d.skills)||!Array.isArray(d.pins)||!d.completed||typeof d.completed!=='object'||Array.isArray(d.completed)||!d.notes||typeof d.notes!=='object'||Array.isArray(d.notes)) throw new Error('Incomplete backup');
+  if(d.saved.length>1000||d.skills.length>1000||d.pins.length>2000||Object.keys(d.completed).length>10000||Object.keys(d.notes).length>1000) throw new Error('Backup exceeds workspace limits');
+  const knownProjects=new Set(PROJECTS.map(p=>p.id));
+  const knownSkills=new Set(SKILLS.map(s=>s.id));
+  const saved=[...new Set(d.saved.filter(x=>typeof x==='string'&&knownProjects.has(x)))];
+  const skills=[...new Set(d.skills.filter(x=>typeof x==='string'&&knownSkills.has(x)))];
+  const completed=Object.fromEntries(Object.entries(d.completed).filter(([k,v])=>typeof k==='string'&&/^[a-z0-9-]+-[0-5]$/.test(k)&&typeof v==='boolean').map(([k,v])=>[k,v]));
+  const notes=Object.fromEntries(Object.entries(d.notes).filter(([k,v])=>knownProjects.has(k)&&typeof v==='string').map(([k,v])=>[k,v.slice(0,10000)]));
+  const pins=d.pins.filter(x=>x&&typeof x==='object'&&typeof x.title==='string'&&typeof x.url==='string'&&safeUrl(x.url)).map(x=>({
+    id:String(x.id||crypto.randomUUID()).slice(0,100),title:x.title.slice(0,140),url:safeUrl(x.url),
+    category:String(x.category||'Other').slice(0,60),note:String(x.note||'').slice(0,1000),date:String(x.date||'').slice(0,30)
+  }));
+  return {saved,skills,completed,pins,notes};
+}
+$('#restore-btn').addEventListener('click',()=>$('#restore-file').click());
+$('#restore-file').addEventListener('change',async e=>{
+  const file=e.target.files?.[0];
+  if(!file)return;
+  try{
+    if(file.size>2*1024*1024) throw new Error('Backup must be smaller than 2 MB');
+    const restored=validateBackup(JSON.parse(await file.text()));
+    if(!window.confirm('Restore this workspace backup? This replaces projects, notes and links currently saved on this device.'))return;
+    state=restored;
+    persist();
+    render();
+    toast('Workspace restored successfully');
+  }catch(err){toast('Restore failed: '+err.message)}
+  finally{e.target.value=''}
+});
+
 $('#menu-toggle').addEventListener('click',()=>{const menu=$('#sidebar');menu.classList.toggle('open');$('#menu-toggle').setAttribute('aria-expanded',String(menu.classList.contains('open')))});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#sidebar').classList.remove('open')});
 window.addEventListener('hashchange',render);render();
