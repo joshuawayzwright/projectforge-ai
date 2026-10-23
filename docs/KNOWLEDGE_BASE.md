@@ -235,3 +235,19 @@ The workbook holds 12 copy-ready prompts (with placeholders that require user in
 ---
 
 **Revision log:** 2026-10-23: Initial consolidated technical/source knowledge base built from the ProjectForge v1.1 source bundle, workbook, documented public Pinterest preview findings, GitHub repository metadata, GitHub Actions records and GitHub Pages documentation.
+
+## 13. Build updates — 2026-10-23
+
+**Shipped to source control (not necessarily publicly deployed):**
+
+- ProjectForge v2 added required-skill filtering, project build-stage tracking and a saved-project CSV status export.
+- Added curated AI resources directory (24 outbound provider URLs; this does not verify current prices or commercial licences).
+- Added three independently functional static browser apps in `apps/`: **Prompt Vault** (prompt library with backup/import), **Idea Canvas** (editable idea briefs with Markdown/JSON export), and **Priority Coach** (impact–effort ranking, completion tracking and CSV).
+- Each app persists locally on its browser origin with its own storage key. They do **not** send data to a backend, call AI models or sync across devices.
+- Main app backward-compatible workspace restore now accepts the optional `stages` object and continues accepting v1 backups.
+- Updated service worker cache to `projectforge-v2.0`, including starter app assets.
+- Added `scripts/verify.mjs` for zero-dependency syntax and asset checks and integrated it into the deployment workflow.
+- Local Chromium **DOM-injection** tests covered main navigation on mobile/desktop, skill filtering, saved stages, resources listing, and starter-app create/export actions. Local URL navigation was blocked by this execution environment, so these tests do **not** establish real HTTP delivery, installability, caching or production performance.
+- Pages and deployment remain separate requirements. GitHub Actions cannot provision Pages with its default token and GitHub Pages must first be enabled by an authenticated repo administrator; then verify a successful run and HTTP 200 on the public URL.
+
+**Next candidates, not built:** authorized Pin metadata import, multi-device sync, GitHub OAuth issue/repo creation, secure model inference with spend limits, full automated end-to-end browser tests and content publishing integrations.
