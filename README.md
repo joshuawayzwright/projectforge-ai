@@ -13,6 +13,28 @@ An original **zero-API-cost**, mobile-first AI project discovery and planning ap
 - Work offline after the first load thanks to a service worker.
 - Responsive layout optimised for Android and desktop.
 
+
+## Version 2.0 builds (23 October 2026)
+
+The main planning workspace now has:
+- A required-skill filter in the project explorer, alongside keyword, difficulty and category filtering.
+- Per-project build stage tracking (Idea, Building, Testing, Shipped), stored on the device.
+- A saved-build dashboard with stage counts and CSV export.
+- A 24-link AI tools directory. Entries are curated external resources; pricing and availability are not validated automatically.
+- A **Starter apps** section with three independent, working static browser applications:
+
+| App | Path | Functions |
+| --- | --- | --- |
+| Prompt Vault | `apps/prompt-vault/` | Add, search, copy, delete, export and import prompts |
+| Idea Canvas | `apps/idea-canvas/` | Create/edit idea canvases, export Markdown briefs, JSON batch backup |
+| Priority Coach | `apps/priority-coach/` | Add/rank tasks by impact and effort, mark complete, export CSV |
+
+All four interfaces store information **only in the current browser**. Neither a real AI inference engine nor remote sync has been implemented. Make backups before resetting devices.
+
+For local static checks without external packages, run `node scripts/verify.mjs`. These run automatically before GitHub Pages deployment attempts. The starter apps can be opened directly by their `index.html` files for basic offline use; full PWA caching needs an HTTP(S) origin.
+
+**Publishing dependency:** Pages must be enabled by a signed-in repository administrator in **Settings → Pages → Source → GitHub Actions**. The workflow cannot create a Pages site using its default `GITHUB_TOKEN`, so workflow success and the public URL must be verified separately. Vercel deployment is not currently usable with the connected account.
+
 ## Run locally
 
 No Node.js, build tools, environment variables or API keys required.
