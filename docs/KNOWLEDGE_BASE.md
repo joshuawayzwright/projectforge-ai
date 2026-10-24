@@ -251,3 +251,22 @@ The workbook holds 12 copy-ready prompts (with placeholders that require user in
 - Pages and deployment remain separate requirements. GitHub Actions cannot provision Pages with its default token and GitHub Pages must first be enabled by an authenticated repo administrator; then verify a successful run and HTTP 200 on the public URL.
 
 **Next candidates, not built:** authorized Pin metadata import, multi-device sync, GitHub OAuth issue/repo creation, secure model inference with spend limits, full automated end-to-end browser tests and content publishing integrations.
+
+
+## 13. Version 3.0 — six working starter apps (2026-10-24)
+
+GitHub Pages was enabled by the repository administrator on 2026-10-24; a previously failed deployment rerun succeeded and the published main app plus original three routes returned content.
+
+Added three browser-only starter applications, all without AI API calls, user accounts, automatic syncing or external social posting:
+
+- **Study Cards** at `apps/study-cards/`: editable study decks, reveal/grade intervals (Again, Good, Easy), due-date review, search and JSON backup/restore. The review scheduler is a simple interval heuristic, not validated learning research software.
+- **Content Planner** at `apps/content-planner/`: locally scheduled social content, six platform choices, draft stages, editing, search, spreadsheet-ready CSV export and JSON backup/restore. It does not publish to social services.
+- **Research Tracker** at `apps/reading-tracker/`: manually saved HTTPS links and notes, reading status, search, Markdown reading log, JSON backup/restore. It does not scrape pages or verify external content for the user.
+
+The main ProjectForge `#starters` directory now lists **six** static apps. Updated `sw.js` to cache the additional routes/assets under `projectforge-v3.0`, updated `scripts/verify.mjs` to cover all 21 core assets and JavaScript syntax, and updated the README. The six app workspace data sets are independent browser localStorage records; the main ProjectForge workspace backup does not currently bundle each starter's data. Users should back up within each individual app.
+
+- Primary live URL: https://joshuawayzwright.github.io/projectforge-ai/
+- Deployment workflow: https://github.com/joshuawayzwright/projectforge-ai/actions
+- New app links: https://joshuawayzwright.github.io/projectforge-ai/apps/study-cards/ ; https://joshuawayzwright.github.io/projectforge-ai/apps/content-planner/ ; https://joshuawayzwright.github.io/projectforge-ai/apps/reading-tracker/
+
+Release verification: Node.js syntax and static references pass locally and in GitHub Actions; initial public HTTP checks returned pages for all three new routes. Record any browser-interaction findings separately before claiming they passed.
