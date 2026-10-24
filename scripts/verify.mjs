@@ -3,7 +3,6 @@ import {existsSync, readFileSync} from 'node:fs';
 import {resolve, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
-
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const src=(path)=>readFileSync(resolve(root,path),'utf8');
 const required=[
@@ -11,14 +10,16 @@ const required=[
  'icons/logo.svg','icons/icon-192.png','icons/icon-512.png',
  'apps/shared.css','apps/prompt-vault/index.html','apps/prompt-vault/app.js',
  'apps/idea-canvas/index.html','apps/idea-canvas/app.js',
- 'apps/priority-coach/index.html','apps/priority-coach/app.js'
+ 'apps/priority-coach/index.html','apps/priority-coach/app.js',
+ 'apps/study-cards/index.html','apps/study-cards/app.js',
+ 'apps/content-planner/index.html','apps/content-planner/app.js',
+ 'apps/reading-tracker/index.html','apps/reading-tracker/app.js'
 ];
 for(const file of required)assert.ok(existsSync(resolve(root,file)),`Missing ${file}`);
 for(const file of required.filter(x=>x.endsWith('.js'))){
  const result=spawnSync(process.execPath,['--check',resolve(root,file)],{encoding:'utf8'});
  assert.equal(result.status,0,`Syntax error in ${file}: ${result.stderr}`);
 }
-// Validate all local <script src> / <link href> dependencies.
 for(const file of required.filter(x=>x.endsWith('index.html'))){
  const html=src(file);
  assert.match(html,/<html lang="en">/i,`Missing language in ${file}`);
@@ -36,4 +37,4 @@ for(const icon of manifest.icons||[])assert.ok(existsSync(resolve(root,icon.src)
 const app=src('app.js');
 for(const requiredName of ['renderStarterApps','renderResources','filteredProjects','validateBackup','savedCsv','stage-picker'])
  assert.ok(app.includes(requiredName),`Missing app feature: ${requiredName}`);
-console.log('ProjectForge static checks passed: 15 required files, JS syntax, local assets, manifest, v2 features.');
+console.log('ProjectForge static checks passed: 21 required files, JS syntax, local assets, manifest, v2 features.');
