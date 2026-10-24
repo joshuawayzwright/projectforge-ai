@@ -13,7 +13,9 @@ const required=[
  'apps/priority-coach/index.html','apps/priority-coach/app.js',
  'apps/study-cards/index.html','apps/study-cards/app.js',
  'apps/content-planner/index.html','apps/content-planner/app.js',
- 'apps/reading-tracker/index.html','apps/reading-tracker/app.js'
+ 'apps/reading-tracker/index.html','apps/reading-tracker/app.js',
+ 'apps/github-hub/index.html','apps/github-hub/app.js',
+ 'apps/workflow-lab/index.html','apps/workflow-lab/app.js'
 ];
 for(const file of required)assert.ok(existsSync(resolve(root,file)),`Missing ${file}`);
 for(const file of required.filter(x=>x.endsWith('.js'))){
@@ -35,6 +37,6 @@ for(const path of assets)assert.ok(existsSync(resolve(root,path)),`Offline asset
 const manifest=JSON.parse(src('manifest.webmanifest'));
 for(const icon of manifest.icons||[])assert.ok(existsSync(resolve(root,icon.src)),`Manifest icon missing: ${icon.src}`);
 const app=src('app.js');
-for(const requiredName of ['renderStarterApps','renderResources','filteredProjects','validateBackup','savedCsv','stage-picker'])
+for(const requiredName of ['renderStarterApps','renderResources','renderConnections','filteredProjects','validateBackup','savedCsv','stage-picker'])
  assert.ok(app.includes(requiredName),`Missing app feature: ${requiredName}`);
-console.log('ProjectForge static checks passed: 21 required files, JS syntax, local assets, manifest, v2 features.');
+console.log('ProjectForge static checks passed: 25 required files, JS syntax, local assets, manifest, connection tools.');

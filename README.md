@@ -78,3 +78,11 @@ MIT; see [LICENSE](LICENSE).
 ## Automated publishing
 
 The repository includes `.github/workflows/deploy-pages.yml` to publish the static site on every push to `main` and with manual workflow runs. **First enable GitHub Pages** in repository Settings → Pages, select **GitHub Actions** as the publishing source. The workflow cannot grant itself permission to activate Pages for a new repository; that initial administrator action is required. An active alternative is to import the same GitHub repository to a hosting provider with an available account.
+
+## v4 live connections and workflow tools
+
+- **[GitHub Live Hub](apps/github-hub/)** — Read-only client-side access to GitHub public REST API. Loads public profile and up to 100 public repositories, shows recent activity, filters results, opens repository and published-site links, exports Markdown build briefs. No GitHub login or token is requested. GitHub public API rate limits apply (typically 60 requests per hour per IP); a five-minute session cache reduces calls. Private repositories and write operations are not available.
+- **[Workflow Lab](apps/workflow-lab/)** — Six approval-first templates (content, research, community support, lead enquiries, education video, GitHub releases), locally saved review checklists, progress tracking and Markdown/prompt exports. No external automations are executed.
+- **Connections hub** in the main navigation explains capabilities and limitations.
+
+**Provider security:** Hosting on static GitHub Pages does not securely protect AI or OAuth secrets. Real model calls, cloud synchronisation and private/write-enabled connections need an authenticated server gateway with secret management, usage caps, authorisation and human review. The existing ChatGPT-connected GitHub plugin is NOT automatically available inside this public website. Never put tokens in a client-side file.
