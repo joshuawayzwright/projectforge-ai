@@ -269,4 +269,4 @@ The main ProjectForge `#starters` directory now lists **six** static apps. Updat
 - Deployment workflow: https://github.com/joshuawayzwright/projectforge-ai/actions
 - New app links: https://joshuawayzwright.github.io/projectforge-ai/apps/study-cards/ ; https://joshuawayzwright.github.io/projectforge-ai/apps/content-planner/ ; https://joshuawayzwright.github.io/projectforge-ai/apps/reading-tracker/
 
-Release verification: Node.js syntax and static references pass locally and in GitHub Actions; initial public HTTP checks returned pages for all three new routes. Record any browser-interaction findings separately before claiming they passed.
+Release verification: Node.js syntax and static references passed locally and in GitHub Actions. On 2026-10-24 an isolated browser interaction smoke test passed 4/4 checks: six starter links present; Study Cards saved and revealed a flashcard; Content Planner saved a dated Facebook draft without publishing; Research Tracker saved an HTTPS source. The browser test observed no page-level JavaScript errors or unhandled promise rejections. It was not a substitute for full multi-device QA.
