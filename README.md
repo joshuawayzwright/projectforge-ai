@@ -13,27 +13,25 @@ An original **zero-API-cost**, mobile-first AI project discovery and planning ap
 - Work offline after the first load thanks to a service worker.
 - Responsive layout optimised for Android and desktop.
 
-
 ## Version 2.0 builds (23 October 2026)
 
-The main planning workspace now has:
-- A required-skill filter in the project explorer, alongside keyword, difficulty and category filtering.
-- Per-project build stage tracking (Idea, Building, Testing, Shipped), stored on the device.
-- A saved-build dashboard with stage counts and CSV export.
-- A 24-link AI tools directory. Entries are curated external resources; pricing and availability are not validated automatically.
-- A **Starter apps** section with three independent, working static browser applications:
+The main planning workspace now includes skill-based search, build stage tracking, a saved-build CSV report and a directory of 24 official AI-tool links. Three independent working starter apps ship inside `apps/`:
 
-| App | Path | Functions |
-| --- | --- | --- |
-| Prompt Vault | `apps/prompt-vault/` | Add, search, copy, delete, export and import prompts |
-| Idea Canvas | `apps/idea-canvas/` | Create/edit idea canvases, export Markdown briefs, JSON batch backup |
-| Priority Coach | `apps/priority-coach/` | Add/rank tasks by impact and effort, mark complete, export CSV |
+- **Prompt Vault** (`apps/prompt-vault/`): store/search/copy prompts and JSON import/export.
+- **Idea Canvas** (`apps/idea-canvas/`): capture and edit concepts, export Markdown/JSON.
+- **Priority Coach** (`apps/priority-coach/`): impact–effort task prioritisation, completion and CSV export.
 
-All four interfaces store information **only in the current browser**. Neither a real AI inference engine nor remote sync has been implemented. Make backups before resetting devices.
+All data is stored locally in each browser. No AI inference, backend or sync service is implemented. Run `node scripts/verify.mjs` for zero-dependency syntax and static asset checks. GitHub Pages must be enabled by a signed-in repository administrator in Settings → Pages → GitHub Actions before the deployment workflow will succeed.
 
-For local static checks without external packages, run `node scripts/verify.mjs`. These run automatically before GitHub Pages deployment attempts. The starter apps can be opened directly by their `index.html` files for basic offline use; full PWA caching needs an HTTP(S) origin.
+## Version 3.0 expansion (24 October 2026)
 
-**Publishing dependency:** Pages must be enabled by a signed-in repository administrator in **Settings → Pages → Source → GitHub Actions**. The workflow cannot create a Pages site using its default `GITHUB_TOKEN`, so workflow success and the public URL must be verified separately. Vercel deployment is not currently usable with the connected account.
+Three more zero-API-cost interactive apps join the Build Lab (six total):
+
+- **Study Cards** (`apps/study-cards/`): create/edit/deck-search flashcards, reveal answers, choose review intervals, show due cards and backup/restore JSON.
+- **Content Planner** (`apps/content-planner/`): schedule original posts for six platforms, edit workflow stage, search, CSV export and JSON backup/restore. This tool does **not** publish posts.
+- **Research Tracker** (`apps/reading-tracker/`): manually save verified HTTPS reading links, topics, personal notes and review status, plus Markdown and JSON export/restore. This tool does **not** scrape or summarise external sites.
+
+No user authentication, automatic multi-device sync, AI inference or third-party account access was introduced. Each app has an independent localStorage key. The site uses GitHub Pages and automated source checks.
 
 ## Run locally
 
