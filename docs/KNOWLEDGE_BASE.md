@@ -270,3 +270,13 @@ The main ProjectForge `#starters` directory now lists **six** static apps. Updat
 - New app links: https://joshuawayzwright.github.io/projectforge-ai/apps/study-cards/ ; https://joshuawayzwright.github.io/projectforge-ai/apps/content-planner/ ; https://joshuawayzwright.github.io/projectforge-ai/apps/reading-tracker/
 
 Release verification: Node.js syntax and static references passed locally and in GitHub Actions. On 2026-10-24 an isolated browser interaction smoke test passed 4/4 checks: six starter links present; Study Cards saved and revealed a flashcard; Content Planner saved a dated Facebook draft without publishing; Research Tracker saved an HTTPS source. The browser test observed no page-level JavaScript errors or unhandled promise rejections. It was not a substitute for full multi-device QA.
+
+## Update: 2026-10-24 — ProjectForge AI v4 connected release
+
+- Commit: [v4 release](https://github.com/joshuawayzwright/projectforge-ai/commit/752cbac8d054c4fb266e055add36a56d68fa03ef).
+- The platform now includes **eight** starter apps. v4 added [GitHub Live Hub](https://joshuawayzwright.github.io/projectforge-ai/apps/github-hub/) and [Workflow Lab](https://joshuawayzwright.github.io/projectforge-ai/apps/workflow-lab/); existing six apps remain intact.
+- GitHub Live Hub performs real read-only client-side public GitHub REST API requests, displaying only public repositories, activity and links. No account login, private data or write actions; unauthenticated rate limits apply.
+- Workflow Lab stores approval-first process plans locally, includes six templates, review checks, Markdown export and prompt copy; it does **not** execute automated external tasks.
+- Main menu includes a Connections hub and the service worker cache is version v4.0.
+- GitHub Actions [release run](https://github.com/joshuawayzwright/projectforge-ai/actions/runs/40049397043) completed successfully. Live URLs for all eight apps were fetched and verified to load. Separate browser checks verified a live GitHub profile with `projectforge-ai`, a generated six-step workflow with first step marked complete, and both Connections links.
+- A real paid AI model or private account integration is **not** yet connected: GitHub Pages is static hosting and must not embed secret API keys. Such integrations need a secure backend, authentication, budget limits, permissions and clear user approval.

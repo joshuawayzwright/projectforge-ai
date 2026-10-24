@@ -15,7 +15,7 @@ An original **zero-API-cost**, mobile-first AI project discovery and planning ap
 
 ## Version 2.0 builds (23 October 2026)
 
-The main planning workspace now includes skill-based search, build stage tracking, a saved-build CSV report and a directory of 24 official AI-tool links. Three independent working starter apps ship inside `apps/`:
+The main planning workspace now includes skill-based search, build stage tracking, a saved-build CSV report and a directory of 24 official AI-tool links. The initial v2 release included three standalone starter apps inside `apps/`:
 
 - **Prompt Vault** (`apps/prompt-vault/`): store/search/copy prompts and JSON import/export.
 - **Idea Canvas** (`apps/idea-canvas/`): capture and edit concepts, export Markdown/JSON.
