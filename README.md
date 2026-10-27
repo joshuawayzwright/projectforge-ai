@@ -2,6 +2,27 @@
 
 An original **zero-API-cost**, mobile-first AI project discovery and planning app. It is inspired by **themes** from a publicly shared Pinterest board (not a reproduction of its Pins).
 
+## Current status — 27 October 2026
+
+**Live app:** https://joshuawayzwright.github.io/projectforge-ai/
+
+ProjectForge AI is part of **The Solo Service Provider** development portfolio. The current v4 workspace includes **eight** standalone browser tools:
+
+| Tool | Source |
+| --- | --- |
+| Prompt Vault | [apps/prompt-vault/](apps/prompt-vault/) |
+| Idea Canvas | [apps/idea-canvas/](apps/idea-canvas/) |
+| Priority Coach | [apps/priority-coach/](apps/priority-coach/) |
+| Study Cards | [apps/study-cards/](apps/study-cards/) |
+| Content Planner | [apps/content-planner/](apps/content-planner/) |
+| Research Tracker | [apps/reading-tracker/](apps/reading-tracker/) |
+| GitHub Live Hub | [apps/github-hub/](apps/github-hub/) |
+| Workflow Lab | [apps/workflow-lab/](apps/workflow-lab/) |
+
+GitHub Pages is already configured for this repository. The [latest audited deployment](https://github.com/joshuawayzwright/projectforge-ai/actions/runs/40110906848) succeeded at source commit [`5ef8f14`](https://github.com/joshuawayzwright/projectforge-ai/commit/5ef8f14b42c9dadfe7a1cf85642b6810652d5661). The main app, GitHub Live Hub and Workflow Lab returned HTTP 200 with their expected page titles on 27 October 2026. These reachability checks do not replace complete mobile, accessibility or functional acceptance testing.
+
+The app uses local templates and browser storage. GitHub Live Hub reads public GitHub data; there is no model inference, customer authentication, cloud workspace sync, paid entitlement system or verified app-store publication. Commercial integration remains subject to the [integration roadmap](docs/POWERHOUSE-INTEGRATION.md).
+
 ## Features
 
 - Explore **30 original** project ideas across three skill levels; search and filter by category and difficulty.
@@ -21,7 +42,7 @@ The main planning workspace now includes skill-based search, build stage trackin
 - **Idea Canvas** (`apps/idea-canvas/`): capture and edit concepts, export Markdown/JSON.
 - **Priority Coach** (`apps/priority-coach/`): impact–effort task prioritisation, completion and CSV export.
 
-All data is stored locally in each browser. No AI inference, backend or sync service is implemented. Run `node scripts/verify.mjs` for zero-dependency syntax and static asset checks. GitHub Pages must be enabled by a signed-in repository administrator in Settings → Pages → GitHub Actions before the deployment workflow will succeed.
+All data is stored locally in each browser. No AI inference, backend or sync service is implemented. Run `node scripts/verify.mjs` for zero-dependency syntax and static asset checks. For a new fork, a signed-in repository administrator must enable GitHub Pages with GitHub Actions as the publishing source. This repository's Pages deployment is already configured.
 
 ## Version 3.0 expansion (24 October 2026)
 
@@ -45,7 +66,10 @@ Open **http://localhost:8080/**. Opening `index.html` directly can render basic 
 
 ## Deploy
 
-### GitHub Pages
+### GitHub Pages — new fork setup
+
+The existing ProjectForge deployment is live at the URL above. Use these steps when publishing a new fork:
+
 1. In **Settings → Pages**, change **Source** to **GitHub Actions**, then save. This one-time action requires a signed-in repository administrator.
 2. Run the included **Deploy ProjectForge AI to GitHub Pages** workflow from the Actions tab (or push a change to `main`).
 3. After a successful deployment, open the URL GitHub Pages reports. The app uses relative paths and supports project Pages locations.
@@ -71,13 +95,23 @@ The user's publicly shared [Artificial intelligence Pinterest board](https://au.
 
 This is a front-end MVP and requires no back-end service. It is **not** an LLM agent platform, a prompt execution engine, a Pinterest importer, a real workflow executor or a production subscription system. Structured prompts are generated with templates rather than an AI model. Timelines are estimates to help prioritise, not promises.
 
+## Maintainer and contact
+
+**Joshua Wright** — [@joshuawayzwright](https://github.com/joshuawayzwright), Gold Coast, Queensland, Australia.
+
+- **Email:** [superadmin2712@gmail.com](mailto:superadmin2712@gmail.com)
+- **Phone:** [0452 272 820](tel:+61452272820)
+- **Commercial website:** [The Solo Service Provider](https://thesoloserviceprovider.com.au/)
+
+The Solo Service Provider and WrightWayz operate separately. This project's commercial development does not imply a shared charity service, customer database or payment flow.
+
 ## License
 
 MIT; see [LICENSE](LICENSE).
 
 ## Automated publishing
 
-The repository includes `.github/workflows/deploy-pages.yml` to publish the static site on every push to `main` and with manual workflow runs. **First enable GitHub Pages** in repository Settings → Pages, select **GitHub Actions** as the publishing source. The workflow cannot grant itself permission to activate Pages for a new repository; that initial administrator action is required. An active alternative is to import the same GitHub repository to a hosting provider with an available account.
+The repository includes [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml) to publish the static site on every push to `main` and with manual workflow runs. GitHub Pages is already enabled here; inspect the [Actions results](https://github.com/joshuawayzwright/projectforge-ai/actions) after changes. A new fork needs the one-time administrator setup described above before its workflow can publish.
 
 ## v4 live connections and workflow tools
 

@@ -192,7 +192,9 @@ The workbook holds 12 copy-ready prompts (with placeholders that require user in
 
 ## 10. Deployment and release status
 
-**As last verified 2026-10-23:**
+The account/setup observations below are historical. The [27 October 2026 audit](#update-2026-10-27--github-documentation-and-contact-audit) records the current successful GitHub Pages deployment; do not treat the older Pages blocker as current.
+
+**Historical status as verified 2026-10-23:**
 
 - GitHub repository is present and readable; GitHub source edits landed on `main` during 2026-10-21.
 - GitHub Actions `.github/workflows/deploy-pages.yml` is committed. It uses checkout, configure-pages, upload-pages-artifact, and deploy-pages, triggered on `main` push or manual dispatch.
@@ -280,3 +282,12 @@ Release verification: Node.js syntax and static references passed locally and in
 - Main menu includes a Connections hub and the service worker cache is version v4.0.
 - GitHub Actions [release run](https://github.com/joshuawayzwright/projectforge-ai/actions/runs/40049397043) completed successfully. Live URLs for all eight apps were fetched and verified to load. Separate browser checks verified a live GitHub profile with `projectforge-ai`, a generated six-step workflow with first step marked complete, and both Connections links.
 - A real paid AI model or private account integration is **not** yet connected: GitHub Pages is static hosting and must not embed secret API keys. Such integrations need a secure backend, authentication, budget limits, permissions and clear user approval.
+
+## Update: 2026-10-27 — GitHub documentation and contact audit
+
+- Audited source: [`5ef8f14b42c9dadfe7a1cf85642b6810652d5661`](https://github.com/joshuawayzwright/projectforge-ai/commit/5ef8f14b42c9dadfe7a1cf85642b6810652d5661). The repository contains eight standalone tools: Prompt Vault, Idea Canvas, Priority Coach, Study Cards, Content Planner, Research Tracker, GitHub Live Hub and Workflow Lab. The [v4 release record](RELEASE_V4.md) and each `apps/` directory support this count.
+- The [GitHub Pages deployment run 40110906848](https://github.com/joshuawayzwright/projectforge-ai/actions/runs/40110906848) completed successfully for that source commit. Actual read-only HTTP checks on 27 October returned **200** and the expected page titles for the [main app](https://joshuawayzwright.github.io/projectforge-ai/), [GitHub Live Hub](https://joshuawayzwright.github.io/projectforge-ai/apps/github-hub/) and [Workflow Lab](https://joshuawayzwright.github.io/projectforge-ai/apps/workflow-lab/). These checks establish current reachability; they are not a new full functional, mobile, accessibility or offline test.
+- The owner requested current GitHub information and correct public contact details on 27 October. The current public maintainer details are **Joshua Wright**, **superadmin2712@gmail.com**, **0452 272 820**, Gold Coast, Queensland, Australia. These are contact destinations; this audit did not send email or place a call.
+- Updated the README with the live URL, eight-tool index, evidence and contacts. Reframed initial Pages enablement instructions as setup for a new fork, and corrected the integration document's old six-tool count. Earlier dated release notes remain historical evidence.
+- Product boundaries remain unchanged: local browser workspaces and template generation, plus read-only public GitHub access. No model-backed inference, private GitHub access, account sync, paid entitlements or app-store publication was introduced. The Solo Service Provider commercial portfolio remains separate from WrightWayz operations.
+- This refresh changes documentation only. Runtime files, workspace storage keys, service-worker cache, licence, hosting settings and payment configuration were not changed. No additional runtime tests were needed for these documentation edits.
