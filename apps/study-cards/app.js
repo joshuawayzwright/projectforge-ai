@@ -1,14 +1,15 @@
 'use strict';
 const KEY='pforge-study-cards-v1', $=id=>document.getElementById(id);
 let entries=[],editId=null,dueOnly=false;
-const today=()=>new Date().toISOString().slice(0,10);
+const localDate=(date=new Date())=>`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`,today=()=>localDate();
 function notify(text){$('message').textContent=text}
-function valid(x){return x&&typeof x==='object'&&typeof x.id==='string'&&typeof x.deck==='string'&&typeof x.question==='string'&&typeof x.answer==='string'&&typeof x.due==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x.due)&&Number.isInteger(x.interval)&&x.interval>=0&&x.interval<=365&&x.deck.length<=60&&x.question.length<=600&&x.answer.length<=1500}
+function validDate(value){if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;const date=new Date(`${value}T00:00:00.000Z`);return Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===value}
+function valid(x){return x&&typeof x==='object'&&typeof x.id==='string'&&typeof x.deck==='string'&&typeof x.question==='string'&&typeof x.answer==='string'&&validDate(x.due)&&Number.isInteger(x.interval)&&x.interval>=0&&x.interval<=365&&x.deck.length<=60&&x.question.length<=600&&x.answer.length<=1500}
 function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(x)?x.filter(valid).slice(0,500):[]}catch{return []}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(entries))}catch{notify('Storage unavailable; export a backup now.')}}
 function elt(tag,text,cls){const n=document.createElement(tag);n.textContent=text;if(cls)n.className=cls;return n}
 function btn(label,action,cls='secondary'){const b=elt('button',label,cls);b.type='button';b.addEventListener('click',action);return b}
-function addDays(n){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
+function addDays(n){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+n);return localDate(d)}
 function reset(){editId=null;$('record-form').reset();$('form-heading').textContent='Create new';$('save-button').textContent='Save'}
 function render(){const q=$('search').value.toLowerCase().trim(),list=$('list');list.replaceChildren();$('count').textContent=entries.length;$('due-only').setAttribute('aria-pressed',String(dueOnly));$('due-only').textContent=dueOnly?'Show all cards':'Show due only';
  const matches=entries.filter(x=>(x.deck+' '+x.question+' '+x.answer).toLowerCase().includes(q)&&(!dueOnly||x.due<=today())).sort((a,b)=>a.due.localeCompare(b.due));
