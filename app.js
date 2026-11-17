@@ -44,7 +44,7 @@ const PROJECTS=[
 ];
 const KEY='projectforge-ai-v1';
 const original={saved:[],skills:[],completed:{},pins:[],notes:{},stages:{}};
-let state=load();let route='dashboard';let selectedProject=null;let filter={q:'',level:'All',category:'All',skill:'All'};let promptState={goal:'project',project:'prompt-vault',audience:'Beginner developers',notes:''};
+let state=load();state.pins=state.pins.filter(pin=>pin&&typeof pin==='object'&&typeof pin.title==='string'&&typeof pin.url==='string'&&safeUrl(pin.url)).map(pin=>({...pin,url:safeUrl(pin.url)}));let route='dashboard';let selectedProject=null;let filter={q:'',level:'All',category:'All',skill:'All'};let promptState={goal:'project',project:'prompt-vault',audience:'Beginner developers',notes:''};
 const content=document.getElementById('content');
 const $=(s,root=document)=>root.querySelector(s);
 const escapeHTML=(v)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
